@@ -1,0 +1,17 @@
+name: Docker Build & Push Action
+on: [push, workflow_dispatch]
+jobs:
+  push_image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2          
+      - name: do it
+        uses: mr-smithers-excellent/docker-build-push@v5.6
+        with:
+          image: feyncalc/latex-docker
+          registry: ghcr.io          
+          addLatest: true
+          githubOrg: ${{ secrets.GHCR_USERNAME }}
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }}
